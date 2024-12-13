@@ -1,0 +1,4 @@
+github.com/gokrazy/gokrazy v0.0.0-20241106183216-3fd48c2b9366 h1:RaqiSBCZcnebrloq3lqWj21UmvXV4v2a7JsSXeh+EY8=
+github.com/gokrazy/gokrazy v0.0.0-20241106183216-3fd48c2b9366/go.mod h1:1yOdp952OIkgR9lBNUzV+mBSIcvPV0RCaCmBq9WKTJw=
+golang.org/x/sys v0.20.0 h1:Od9JTbYCk261bKm4M/mw7AklTlFYIa0bIp9BgSm1S8Y=
+golang.org/x/sys v0.20.0/go.mod h1:/VUhepiaJMQUp4+oa/7Zr1D23ma6VTLIYjOOTFZPUcA=
