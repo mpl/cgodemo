@@ -60,6 +60,7 @@ ${LIBWHISPER}:
 ./bin/${TRANSCRIBE}: # build the binary
 ./bin/${TRANSCRIBE}: ${LIBWHISPER}
 	@mkdir -p bin
+	# TODO: seperate recipe for building natively
 #	@C_INCLUDE_PATH=${WHISPER_CPP} LIBRARY_PATH=${WHISPER_CPP} CGO_ENABLED=1 go build -o ./bin/${TRANSCRIBE} ./cmd/main.go
 	GOOS=linux GOARCH=arm64 CC=aarch64-linux-musl-gcc CGO_ENABLED=1 go build -ldflags="-extldflags '-static -L ${WHISPER_CPP}'" -o ./bin/${TRANSCRIBE} ./cmd/main.go
 
