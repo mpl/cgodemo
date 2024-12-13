@@ -61,13 +61,12 @@ ${LIBWHISPER}:
 ./bin/${TRANSCRIBE}: ${LIBWHISPER}
 	@mkdir -p bin
 #	@C_INCLUDE_PATH=${WHISPER_CPP} LIBRARY_PATH=${WHISPER_CPP} CGO_ENABLED=1 go build -o ./bin/${TRANSCRIBE} ./cmd/main.go
-	# TODO: var or relpath for -L
-	GOOS=linux GOARCH=arm64 CC=aarch64-linux-musl-gcc CGO_ENABLED=1 go build -ldflags="-extldflags '-static -L /Users/mpl/src/github.com/mpl/cgodemo/cgohello/../libhello/ccode'" -o ./bin/${TRANSCRIBE} ./cmd/main.go
+	GOOS=linux GOARCH=arm64 CC=aarch64-linux-musl-gcc CGO_ENABLED=1 go build -ldflags="-extldflags '-static -L ${WHISPER_CPP}'" -o ./bin/${TRANSCRIBE} ./cmd/main.go
 
 .PHONY: gok
 gok: ## Deploy with gokrazy
 gok: ${LIBWHISPER}
-	# TODO: var or relpath for -L
+	# TODO: var or relpath for -L in gok config
 	GOOS=linux GOARCH=arm64 CC=aarch64-linux-musl-gcc CGO_ENABLED=1 gok update
 
 .PHONY: glass
