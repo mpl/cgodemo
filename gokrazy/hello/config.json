@@ -4,13 +4,11 @@
 		"HTTPPassword": "uD4Sh05pKSyAYeY5oz7P"
 	},
 	"Packages": [
-		"github.com/gokrazy/fbstatus",
-		"github.com/gokrazy/hello",
 		"github.com/gokrazy/serial-busybox",
 		"github.com/gokrazy/breakglass",
 		"github.com/gokrazy/wifi",
 		"github.com/mpl/simpleHttpd",
-		"github.com/mpl/cgodemo/cgohello/cmd"
+		"github.com/arribada/insight-360/whisper/cmd/transcribe"
 	],
 	"PackageConfig": {
 		"github.com/gokrazy/breakglass": {
@@ -31,17 +29,17 @@
 				"/etc/wifi.json": "wifi.json"
 			}
 		},
+		"github.com/arribada/insight-360/whisper/cmd/transcribe": {
+			"GoBuildFlags": [
+				"-ldflags=-extldflags '-static -L /Users/mpl/src/github.com/mpl/cgodemo/whisper/whisper.cpp'"
+			]
+		},
 		"github.com/mpl/simpleHttpd": {
 			"CommandLineFlags": [
 				"--autocert=false",
 				"--tls=false",
 				"--host=:9090"
 			]
-		},
-		"github.com/mpl/cgodemo/cgohello/cmd": {
-            "GoBuildFlags": [
-                "-ldflags=-extldflags '-static -L /Users/mpl/src/github.com/mpl/cgodemo/cgohello/../libhello/ccode'"
-            ]
 		}
 	},
 	"SerialConsole": "disabled",
