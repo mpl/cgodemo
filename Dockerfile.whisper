@@ -1,16 +1,12 @@
 FROM goreleaser/goreleaser-cross:v1.23.3@sha256:cc69304a8817dde675f0afe551c380545d5f34444946004961116ff394437a6f AS builder
 
 RUN apt-get update
-RUN apt-get install -y git libsdl2-dev
+RUN apt-get install -y git
 
 # TODO: pin it
 RUN mkdir -p /Users/mpl
 ENV GOPATH=/Users/mpl
 RUN go install github.com/gokrazy/tools/cmd/gok@main
-
-# credentials for fetching private (repos) deps.
-# COPY ./gitcreds.sh .
-# RUN ./gitcreds.sh $(cat /run/secrets/botpat)
 
 WORKDIR /Users/mpl/src/github.com/mpl/cgodemo/whisper
 COPY ./whisper .
@@ -18,21 +14,20 @@ COPY ./whisper .
 RUN cd ./whisper.cpp/bindings/go && make whisper
 ENV WHIPSPER_CPP=/Users/mpl/src/github.com/mpl/cgodemo/whisper/whisper.cpp
 
-WORKDIR /Users/mpl/src/github.com/mpl/cgodemo/common
-COPY ./common .
-
+# TODO: move up when we've settled with this
 WORKDIR /Users/mpl/src/github.com/mpl/cgodemo/gokrazy
 COPY ./gokrazy .
 
 # credentials for fetching private (repos) deps.
+# N.B: gitcreds is going to leak into the docker image, so beware where we're building that.
 ARG gitcreds
 COPY ./gitcreds.sh .
 RUN ./gitcreds.sh $gitcreds
 
 # TODO: maybe remove
-# WORKDIR /Users/mpl/src/github.com/mpl/cgodemo/whisper
-# RUN make build
+WORKDIR /Users/mpl/src/github.com/mpl/cgodemo/whisper
+RUN make build
 
 ENV GOPROXY=direct
 ENV GOSUMDB=off
-RUN GOOS=linux GOARCH=arm64 CGO_ENABLED=1 $GOPATH/bin/gok update --parent_dir=/Users/mpl/src/github.com/mpl/cgodemo/gokrazy
+RUN make update

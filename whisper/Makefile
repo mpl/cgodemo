@@ -58,7 +58,7 @@ breakglass: ./bin/${TRANSCRIBE}
 .PHONY: update
 update: ## updating with gok
 update:
-	@cd .. && docker build --progress=plain -f Dockerfile.whisper --build-arg gitcreds=${GITCREDS} .
+	@GOOS=linux GOARCH=arm64 CGO_ENABLED=1 ${GOPATH}/bin/gok update --parent_dir=../gokrazy
 
 .PHONY: prelint
 prelint: ## Prepare for linting.
