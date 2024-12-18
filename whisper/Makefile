@@ -41,30 +41,23 @@ build: ${LIBWHISPER} ./bin/${TRANSCRIBE}
 	@echo ">> Building"
 
 ${LIBWHISPER}:
-#	@docker build --progress=plain --target=artifact --output type=local,dest=${WHISPER_CPP}/ .
 	@cd ${WHISPER_CPP}/bindings/go && make whisper
 
-# TODO: seperate recipe for building natively
 .PHONY: ./bin/${TRANSCRIBE}
 ./bin/${TRANSCRIBE}: # build the binary
 ./bin/${TRANSCRIBE}: ${LIBWHISPER}
 	@mkdir -p bin
-#	@C_INCLUDE_PATH=${WHISPER_CPP} GOOS=linux GOARCH=arm64 CC=aarch64-linux-musl-gcc CGO_ENABLED=1 go build -ldflags="-extldflags '-static -lpthread -L ${WHISPER_CPP}'" -o ./bin/${TRANSCRIBE} ./cmd/transcribe/main.go
 	@C_INCLUDE_PATH=${WHISPER_CPP} LIBRARY_PATH=${WHISPER_CPP} go build -o ./bin/${TRANSCRIBE} ./cmd/transcribe/main.go
-
-.PHONY: glass
-glass: ## Breakglass tarball.
-glass: ./bin/${TRANSCRIBE}
-	@cd ./bin && tar cf ../breakglass.tar ${TRANSCRIBE}
 
 .PHONY: breakglass
 breakglass: ## breaking glass
-breakglass: glass
+breakglass: ./bin/${TRANSCRIBE}
+	@cd ./bin && tar cf ../breakglass.tar ${TRANSCRIBE}
 	@breakglass -debug_tarball_pattern=breakglass.tar hello
 
-.PHONY: gok
-gok: ## gokking
-gok:
+.PHONY: update
+update: ## updating with gok
+update:
 	@cd .. && docker build --progress=plain -f Dockerfile.whisper --build-arg gitcreds=${GITCREDS} .
 
 .PHONY: prelint
