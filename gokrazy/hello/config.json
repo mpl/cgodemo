@@ -8,7 +8,9 @@
 		"github.com/gokrazy/breakglass",
 		"github.com/gokrazy/wifi",
 		"github.com/mpl/simpleHttpd",
-		"github.com/arribada/insight-360/whisper/cmd/transcribe"
+		"tailscale.com/cmd/tailscaled",
+		"tailscale.com/cmd/tailscale",
+		"github.com/gokrazy/mkfs"
 	],
 	"PackageConfig": {
 		"github.com/gokrazy/breakglass": {
@@ -39,6 +41,12 @@
 				"--autocert=false",
 				"--tls=false",
 				"--host=:9090"
+			]
+		},
+		"tailscale.com/cmd/tailscale": {
+			"CommandLineFlags": [
+				"up",
+				"--auth-key=tskey-auth-blabla"
 			]
 		}
 	},
