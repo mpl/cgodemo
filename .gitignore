@@ -28,3 +28,4 @@ go.work.sum
 
 gokrazy/hello/breakglass.authorized_keys
 gokrazy/hello/wifi.json
+gokrazy/hello/ts.key

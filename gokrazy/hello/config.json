@@ -8,6 +8,7 @@
 		"github.com/gokrazy/breakglass",
 		"github.com/gokrazy/wifi",
 		"github.com/mpl/simpleHttpd",
+		"github.com/arribada/insight-360/whisper/cmd/transcribe",
 		"tailscale.com/cmd/tailscaled",
 		"tailscale.com/cmd/tailscale",
 		"github.com/gokrazy/mkfs"
@@ -44,9 +45,12 @@
 			]
 		},
 		"tailscale.com/cmd/tailscale": {
+			"ExtraFilePaths": {
+				"/etc/ts.key": "ts.key"
+			},
 			"CommandLineFlags": [
 				"up",
-				"--auth-key=tskey-auth-blabla"
+				"--auth-key=file:/etc/ts.key"
 			]
 		}
 	},
