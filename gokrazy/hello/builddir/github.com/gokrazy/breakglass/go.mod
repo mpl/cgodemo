@@ -4,7 +4,7 @@ go 1.22.2
 
 require (
 	github.com/creack/pty v1.1.18 // indirect
-	github.com/gokrazy/breakglass v0.0.0-20241212072241-6c59aaaf2868 // indirect
+	github.com/gokrazy/breakglass v0.0.0-20241231085325-c9528b4abb02 // indirect
 	github.com/gokrazy/gokrazy v0.0.0-20230812092215-346db1998f83 // indirect
 	github.com/gokrazy/internal v0.0.0-20230211171410-9608422911d0 // indirect
 	github.com/google/renameio/v2 v2.0.0 // indirect

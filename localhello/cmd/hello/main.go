@@ -7,10 +7,6 @@ import (
 	"flag"
 	"log"
 	"net/http"
-
-	"github.com/arribada/insight-360-common/pkg/common"
-
-	"github.com/ggerganov/whisper.cpp/bindings/go/pkg/whisper"
 )
 
 var (
@@ -20,15 +16,11 @@ var (
 
 func init() {
 	flag.BoolVar(&flagVerbose, "v", false, "be verbose")
-	flag.StringVar(&flagHost, "host", ":8080", "host:port on which we receive start/stop messages")
+	flag.StringVar(&flagHost, "host", ":9091", "host:port on which we receive start/stop messages")
 }
 
 func main() {
 	flag.Parse()
-
-	println(whisper.SampleBits)
-
-	_ = common.MResolve
 
 	// Starting start/stop server
 	if flagHost != "" {
@@ -58,12 +50,12 @@ func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}()
 
 	if r.URL.Path == "/start" {
-		println("START")
+		println("HELLO")
 		return
 	}
 
 	if r.URL.Path == "/stop" {
-		println("STOP")
+		println("GOODBYE")
 		return
 	}
 }

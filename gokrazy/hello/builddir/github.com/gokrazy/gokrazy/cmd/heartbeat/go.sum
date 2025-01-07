@@ -1,5 +1,7 @@
 github.com/gokrazy/gokrazy v0.0.0-20241106183216-3fd48c2b9366 h1:RaqiSBCZcnebrloq3lqWj21UmvXV4v2a7JsSXeh+EY8=
 github.com/gokrazy/gokrazy v0.0.0-20241106183216-3fd48c2b9366/go.mod h1:1yOdp952OIkgR9lBNUzV+mBSIcvPV0RCaCmBq9WKTJw=
+github.com/gokrazy/gokrazy v0.0.0-20241222170545-3e52cbb7766c h1:BlLYrSXWLmvldcxzUtO4uKl17FGHxvlU0hpl5YzPVtU=
+github.com/gokrazy/gokrazy v0.0.0-20241222170545-3e52cbb7766c/go.mod h1:1yOdp952OIkgR9lBNUzV+mBSIcvPV0RCaCmBq9WKTJw=
 github.com/gokrazy/internal v0.0.0-20240629150625-a0f1dee26ef5 h1:XDklMxV0pE5jWiNaoo5TzvWfqdoiRRScmr4ZtDzE4Uw=
 github.com/gokrazy/internal v0.0.0-20240629150625-a0f1dee26ef5/go.mod h1:t3ZirVhcs9bH+fPAJuGh51rzT7sVCZ9yfXvszf0ZjF0=
 github.com/google/renameio/v2 v2.0.0 h1:UifI23ZTGY8Tt29JbYFiuyIU3eX+RNFtUwefq9qAhxg=

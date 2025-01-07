@@ -8,18 +8,23 @@
 		"github.com/gokrazy/breakglass",
 		"github.com/gokrazy/wifi",
 		"github.com/mpl/simpleHttpd",
-		"github.com/arribada/insight-360/whisper/cmd/transcribe",
 		"tailscale.com/cmd/tailscaled",
 		"tailscale.com/cmd/tailscale",
-		"github.com/gokrazy/mkfs"
+		"github.com/gokrazy/mkfs",
+		"github.com/mpl/cgodemo/localhello/cmd/hello"
 	],
 	"PackageConfig": {
+		"github.com/arribada/insight-360/whisper/cmd/transcribe": {
+			"GoBuildFlags": [
+				"-ldflags=-extldflags '-static -L /Users/mpl/src/github.com/mpl/cgodemo/whisper/whisper.cpp'"
+			]
+		},
 		"github.com/gokrazy/breakglass": {
 			"CommandLineFlags": [
 				"-authorized_keys=/etc/breakglass.authorized_keys"
 			],
 			"ExtraFilePaths": {
-				"/etc/breakglass.authorized_keys": "breakglass.authorized_keys"
+				"/etc/breakglass.authorized_keys": "/Users/mpl/src/github.com/mpl/cgodemo/gokrazy/hello/breakglass.authorized_keys"
 			}
 		},
 		"github.com/gokrazy/gokrazy/cmd/randomd": {
@@ -32,11 +37,6 @@
 				"/etc/wifi.json": "wifi.json"
 			}
 		},
-		"github.com/arribada/insight-360/whisper/cmd/transcribe": {
-			"GoBuildFlags": [
-				"-ldflags=-extldflags '-static -L /Users/mpl/src/github.com/mpl/cgodemo/whisper/whisper.cpp'"
-			]
-		},
 		"github.com/mpl/simpleHttpd": {
 			"CommandLineFlags": [
 				"--autocert=false",
@@ -45,13 +45,13 @@
 			]
 		},
 		"tailscale.com/cmd/tailscale": {
-			"ExtraFilePaths": {
-				"/etc/ts.key": "ts.key"
-			},
 			"CommandLineFlags": [
 				"up",
 				"--auth-key=file:/etc/ts.key"
-			]
+			],
+			"ExtraFilePaths": {
+				"/etc/ts.key": "ts.key"
+			}
 		}
 	},
 	"SerialConsole": "disabled",
