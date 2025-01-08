@@ -11,6 +11,7 @@
 		"tailscale.com/cmd/tailscaled",
 		"tailscale.com/cmd/tailscale",
 		"github.com/gokrazy/mkfs",
+		"github.com/gokrazy/selfupdate",
 		"github.com/mpl/cgodemo/localhello/cmd/hello"
 	],
 	"PackageConfig": {
@@ -42,6 +43,17 @@
 				"--autocert=false",
 				"--tls=false",
 				"--host=:9090"
+			]
+		},
+		"github.com/gokrazy/gokrazy/cmd/heartbeat": {
+			"CommandLineFlags": [
+				"--gus_server=http://192.168.0.29:8655"
+			]
+		},
+		"github.com/gokrazy/selfupdate": {
+			"CommandLineFlags": [
+				"--gus_server=http://192.168.0.29:8655",
+				"--skip_waiting=true"
 			]
 		},
 		"tailscale.com/cmd/tailscale": {
