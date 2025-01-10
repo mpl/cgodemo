@@ -19,7 +19,7 @@ func init() {
 	flag.StringVar(&flagHost, "host", ":9091", "host:port on which we receive start/stop messages")
 }
 
-const newcode = "hey this is new code"
+const newcode = "back with upgrade.hostname"
 
 func main() {
 	flag.Parse()

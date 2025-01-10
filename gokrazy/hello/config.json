@@ -1,6 +1,7 @@
 {
-	"Hostname": "192.168.0.31",
+	"Hostname": "marlin-augnat1",
 	"Update": {
+		"Hostname": "192.168.0.31",
 		"HTTPPassword": "uD4Sh05pKSyAYeY5oz7P"
 	},
 	"Packages": [
