@@ -19,7 +19,7 @@ func init() {
 	flag.StringVar(&flagHost, "host", ":9091", "host:port on which we receive start/stop messages")
 }
 
-const newcode = "back with upgrade.hostname"
+const newcode = "manual bump, not valls"
 
 func main() {
 	flag.Parse()
