@@ -19,6 +19,8 @@ func init() {
 	flag.StringVar(&flagHost, "host", ":9091", "host:port on which we receive start/stop messages")
 }
 
+const newcode = "hey this is new code"
+
 func main() {
 	flag.Parse()
 
@@ -50,12 +52,12 @@ func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}()
 
 	if r.URL.Path == "/start" {
-		println("HELLO")
+		println("HELLO", newcode)
 		return
 	}
 
 	if r.URL.Path == "/stop" {
-		println("GOODBYE")
+		println("GOODBYE", newcode)
 		return
 	}
 }
