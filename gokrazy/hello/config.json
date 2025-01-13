@@ -48,12 +48,12 @@
 		},
 		"github.com/gokrazy/gokrazy/cmd/heartbeat": {
 			"CommandLineFlags": [
-				"--gus_server=http://192.168.0.29:8655"
+				"--gus_server=http://100.73.43.15:8655"
 			]
 		},
 		"github.com/gokrazy/selfupdate": {
 			"CommandLineFlags": [
-				"--gus_server=http://192.168.0.29:8655",
+				"--gus_server=http://100.73.43.15:8655",
 				"--skip_waiting=true"
 			]
 		},
