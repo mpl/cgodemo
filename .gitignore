@@ -27,5 +27,5 @@ go.work.sum
 .env
 
 gokrazy/hello/breakglass.authorized_keys
-gokrazy/hello/wifi.json
+gokrazy/hello/wifi.json*
 gokrazy/hello/ts.key

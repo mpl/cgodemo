@@ -19,7 +19,7 @@ func init() {
 	flag.StringVar(&flagHost, "host", ":9091", "host:port on which we receive start/stop messages")
 }
 
-const newcode = "manual bump, not valls"
+const newcode = "with DHCP explicitly disabled."
 
 func main() {
 	flag.Parse()
