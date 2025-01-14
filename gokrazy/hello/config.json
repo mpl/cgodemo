@@ -14,11 +14,6 @@
 		"github.com/gokrazy/selfupdate",
 		"github.com/mpl/cgodemo/localhello/cmd/hello"
 	],
-	"GokrazyPackages": [
-		"github.com/gokrazy/gokrazy/cmd/ntp",
-		"github.com/gokrazy/gokrazy/cmd/randomd",
-		"github.com/gokrazy/gokrazy/cmd/heartbeat"
-    ],
 	"PackageConfig": {
 		"github.com/arribada/insight-360/whisper/cmd/transcribe": {
 			"GoBuildFlags": [
