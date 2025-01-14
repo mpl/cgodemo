@@ -53,7 +53,7 @@
 		"github.com/gokrazy/selfupdate": {
 			"CommandLineFlags": [
 				"--gus_server=http://100.73.43.15:8655",
-				"--skip_waiting=true"
+				"--check_frequency=120s"
 			]
 		},
 		"tailscale.com/cmd/tailscale": {

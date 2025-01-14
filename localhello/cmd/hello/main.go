@@ -19,7 +19,7 @@ func init() {
 	flag.StringVar(&flagHost, "host", ":9091", "host:port on which we receive start/stop messages")
 }
 
-const newcode = "DHCP restored"
+const newcode = "with looped selfupdate"
 
 func main() {
 	flag.Parse()
