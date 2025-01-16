@@ -33,6 +33,9 @@
 				"/etc/machine-id": "a3a3a35e2b024ddf9e8aa7505231936f\n"
 			}
 		},
+		"github.com/gokrazy/gokrazy/cmd/dhcp": {
+			"DontStart": true
+		},
 		"github.com/gokrazy/wifi": {
 			"ExtraFilePaths": {
 				"/etc/wifi.json": "wifi.json"
