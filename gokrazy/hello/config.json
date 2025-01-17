@@ -15,9 +15,25 @@
 		"github.com/mpl/cgodemo/localhello/cmd/localhello"
 	],
 	"PackageConfig": {
-		"github.com/arribada/insight-360/whisper/cmd/transcribe": {
-			"GoBuildFlags": [
-				"-ldflags=-extldflags '-static -L /Users/mpl/src/github.com/mpl/cgodemo/whisper/whisper.cpp'"
+		"github.com/gokrazy/gokrazy/cmd/randomd": {
+			"ExtraFileContents": {
+				"/etc/machine-id": "a3a3a35e2b024ddf9e8aa7505231936f\n"
+			}
+		},
+		"github.com/gokrazy/gokrazy/cmd/dhcp": {
+			"DontStart": true
+		},
+		"github.com/gokrazy/gokrazy/cmd/heartbeat": {
+			"CommandLineFlags": [
+				"--gus_server=http://100.73.43.15:8655"
+			]
+		},
+		"github.com/gokrazy/gokrazy/cmd/ntp": {
+			"CommandLineFlags": [
+				"0.pool.ntp.org",
+				"1.pool.ntp.org",
+				"2.pool.ntp.org",
+				"3.pool.ntp.org"
 			]
 		},
 		"github.com/gokrazy/breakglass": {
@@ -28,30 +44,10 @@
 				"/etc/breakglass.authorized_keys": "/Users/mpl/src/github.com/mpl/cgodemo/gokrazy/hello/breakglass.authorized_keys"
 			}
 		},
-		"github.com/gokrazy/gokrazy/cmd/randomd": {
-			"ExtraFileContents": {
-				"/etc/machine-id": "a3a3a35e2b024ddf9e8aa7505231936f\n"
-			}
-		},
-		"github.com/gokrazy/gokrazy/cmd/dhcp": {
-			"DontStart": true
-		},
 		"github.com/gokrazy/wifi": {
 			"ExtraFilePaths": {
 				"/etc/wifi.json": "wifi.json"
 			}
-		},
-		"github.com/mpl/simpleHttpd": {
-			"CommandLineFlags": [
-				"--autocert=false",
-				"--tls=false",
-				"--host=:9090"
-			]
-		},
-		"github.com/gokrazy/gokrazy/cmd/heartbeat": {
-			"CommandLineFlags": [
-				"--gus_server=http://100.73.43.15:8655"
-			]
 		},
 		"github.com/gokrazy/selfupdate": {
 			"CommandLineFlags": [
@@ -67,6 +63,18 @@
 			"ExtraFilePaths": {
 				"/etc/ts.key": "ts.key"
 			}
+		},
+		"github.com/mpl/simpleHttpd": {
+			"CommandLineFlags": [
+				"--autocert=false",
+				"--tls=false",
+				"--host=:9090"
+			]
+		},
+		"github.com/arribada/insight-360/whisper/cmd/transcribe": {
+			"GoBuildFlags": [
+				"-ldflags=-extldflags '-static -L /Users/mpl/src/github.com/mpl/cgodemo/whisper/whisper.cpp'"
+			]
 		}
 	},
 	"SerialConsole": "disabled",
