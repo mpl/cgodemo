@@ -12,8 +12,7 @@
 		"tailscale.com/cmd/tailscale",
 		"github.com/gokrazy/mkfs",
 		"github.com/gokrazy/selfupdate",
-		"github.com/mpl/cgodemo/localhello/cmd/localhello",
-		"github.com/mpl/cgodemo/debug/cmd/myntp"
+		"github.com/mpl/cgodemo/localhello/cmd/localhello"
 	],
 	"PackageConfig": {
 		"github.com/arribada/insight-360/whisper/cmd/transcribe": {
