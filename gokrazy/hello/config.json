@@ -12,9 +12,15 @@
 		"tailscale.com/cmd/tailscale",
 		"github.com/gokrazy/mkfs",
 		"github.com/gokrazy/selfupdate",
-		"github.com/mpl/cgodemo/localhello/cmd/localhello"
+		"github.com/mpl/cgodemo/localhello/cmd/localhello",
+		"github.com/gokrazy/syslogd/cmd/gokr-syslogd"
 	],
 	"PackageConfig": {
+		"github.com/gokrazy/syslogd/cmd/gokr-syslogd": {
+			"CommandLineFlags": [
+				"-listen=:514"
+			]
+		},
 		"github.com/arribada/insight-360/whisper/cmd/transcribe": {
 			"GoBuildFlags": [
 				"-ldflags=-extldflags '-static -L /Users/mpl/src/github.com/mpl/cgodemo/whisper/whisper.cpp'"
@@ -60,6 +66,14 @@
 				"/etc/wifi.json": "wifi.json"
 			}
 		},
+		"github.com/mpl/cgodemo/debug/cmd/myntp": {
+			"CommandLineFlags": [
+				"0.pool.ntp.org",
+				"1.pool.ntp.org",
+				"2.pool.ntp.org",
+				"3.pool.ntp.org"
+			]
+		},
 		"github.com/mpl/simpleHttpd": {
 			"CommandLineFlags": [
 				"--autocert=false",
@@ -75,14 +89,6 @@
 			"ExtraFilePaths": {
 				"/etc/ts.key": "ts.key"
 			}
-		},
-		"github.com/mpl/cgodemo/debug/cmd/myntp": {
-			"CommandLineFlags": [
-				"0.pool.ntp.org",
-				"1.pool.ntp.org",
-				"2.pool.ntp.org",
-				"3.pool.ntp.org"
-			]
 		}
 	},
 	"SerialConsole": "disabled",
