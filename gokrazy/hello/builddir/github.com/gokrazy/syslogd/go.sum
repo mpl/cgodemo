@@ -1,8 +1,0 @@
-github.com/gokrazy/syslogd v0.0.0-20240510172611-cd7cc52abc63 h1:vAYiNHF/+HF4CNFt+BIYEEMcWSZOCifyLJcg1nUNy/A=
-github.com/gokrazy/syslogd v0.0.0-20240510172611-cd7cc52abc63/go.mod h1:KpSlDfGoyQ4Vc09ksOg8tfXRS7SAC80nuAgrkyCLeAg=
-github.com/google/renameio/v2 v2.0.0 h1:UifI23ZTGY8Tt29JbYFiuyIU3eX+RNFtUwefq9qAhxg=
-github.com/google/renameio/v2 v2.0.0/go.mod h1:BtmJXm5YlszgC+TD4HOEEUFgkJP3nLxehU6hfe7jRt4=
-github.com/klauspost/compress v1.15.9 h1:wKRjX6JRtDdrE9qwa4b/Cip7ACOshUI4smpCQanqjSY=
-github.com/klauspost/compress v1.15.9/go.mod h1:PhcZ0MbTNciWF3rruxRgKxI5NkcHHrHUDtV4Yw2GlzU=
-gopkg.in/mcuadros/go-syslog.v2 v2.3.0 h1:kcsiS+WsTKyIEPABJBJtoG0KkOS6yzvJ+/eZlhD79kk=
-gopkg.in/mcuadros/go-syslog.v2 v2.3.0/go.mod h1:l5LPIyOOyIdQquNg+oU6Z3524YwrcqEm0aKH+5zpt2U=
