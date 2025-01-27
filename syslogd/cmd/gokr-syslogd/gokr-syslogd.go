@@ -336,13 +336,15 @@ func gokrsyslogd() error {
 				srv.files[key] = of
 			}
 			of.lastUse = time.Now()
-			msg := fmt.Sprintf("rfc3339=%s %s: %s\n",
-				timestamp.Format(time.RFC3339),
-				tag,
-				content)
-			fmt.Fprintf(of.f, msg)
+			fmt.Fprintf(of.f, "%s: %s\n", tag, content)
 			if glog != nil {
-				glog.Log(logging.Entry{Payload: msg})
+				// TODO: we could easily filter on tag already here if we wanted to. And provide the tags as a flag to the program.
+				// But let's see first how easy it would be to filter by tag too on goog logging.
+				glog.Log(logging.Entry{Payload: MyEntry{
+					Hostname: hostname,
+					Tag:      tag,
+					Content:  content,
+				}})
 			}
 
 			stride--
@@ -371,22 +373,39 @@ func gokrsyslogd() error {
 	return nil
 }
 
-func main() {
+type MyEntry struct {
+	Hostname string
+	Tag      string
+	Content  string
+}
+
+func initGoogLogging() *logging.Client {
 	// TODO: set that env var in gokrazy config
 	if err := os.Setenv("GOOGLE_APPLICATION_CREDENTIALS", "/etc/gcloud_application_default_credentials.json"); err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		return nil
 	}
 	ctx := context.Background()
 	client, err := logging.NewClient(ctx, "nimble-crane-448814-k5")
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		return nil
 	}
-	glog = client.Logger("my-log")
-	defer func() {
-		if err = client.Close(); err != nil {
-			log.Print(err)
-		}
-	}()
+	// TODO: add hostname?
+	glog = client.Logger("marlin")
+	return client
+}
+
+func main() {
+
+	client := initGoogLogging()
+	if client != nil {
+		defer func() {
+			if err := client.Close(); err != nil {
+				log.Print(err)
+			}
+		}()
+	}
 
 	if err := gokrsyslogd(); err != nil {
 		log.Fatal(err)
