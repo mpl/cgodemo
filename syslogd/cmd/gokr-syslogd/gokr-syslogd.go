@@ -5,6 +5,7 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"io"
@@ -16,6 +17,7 @@ import (
 	"sync/atomic"
 	"time"
 
+	"cloud.google.com/go/logging"
 	"github.com/google/renameio/v2"
 	"github.com/klauspost/compress/zstd"
 	"gopkg.in/mcuadros/go-syslog.v2"
@@ -23,13 +25,17 @@ import (
 
 const basenameFormat = "2006-01-02.log"
 
-// logRateLimited throttles printing error message. This is particularly
-// important when the gokr-syslogd output itself is sent to gokr-syslogd, which
-// could cause infinite log message loops without rate limiting.
-//
-// When the value is 0, a log message can be printed. A background goroutine
-// resets the value to 0 once a second.
-var logRateLimited uint32
+var (
+	// logRateLimited throttles printing error message. This is particularly
+	// important when the gokr-syslogd output itself is sent to gokr-syslogd, which
+	// could cause infinite log message loops without rate limiting.
+	//
+	// When the value is 0, a log message can be printed. A background goroutine
+	// resets the value to 0 once a second.
+	logRateLimited uint32
+
+	glog *logging.Logger
+)
 
 func init() {
 	go func() {
@@ -211,6 +217,7 @@ func (s *server) deleteOldLogs() error {
 }
 
 func gokrsyslogd() error {
+	// TODO: enable/disable goog logging. use cloud project name for it?
 	var (
 		outdir = flag.String("outdir",
 			"/perm/syslogd",
@@ -329,10 +336,14 @@ func gokrsyslogd() error {
 				srv.files[key] = of
 			}
 			of.lastUse = time.Now()
-			fmt.Fprintf(of.f, "rfc3339=%s %s: %s\n",
+			msg := fmt.Sprintf("rfc3339=%s %s: %s\n",
 				timestamp.Format(time.RFC3339),
 				tag,
 				content)
+			fmt.Fprintf(of.f, msg)
+			if glog != nil {
+				glog.Log(logging.Entry{Payload: msg})
+			}
 
 			stride--
 			if stride <= 0 {
@@ -361,6 +372,22 @@ func gokrsyslogd() error {
 }
 
 func main() {
+	// TODO: set that env var in gokrazy config
+	if err := os.Setenv("GOOGLE_APPLICATION_CREDENTIALS", "/etc/gcloud_application_default_credentials.json"); err != nil {
+		log.Fatal(err)
+	}
+	ctx := context.Background()
+	client, err := logging.NewClient(ctx, "nimble-crane-448814-k5")
+	if err != nil {
+		log.Fatal(err)
+	}
+	glog = client.Logger("my-log")
+	defer func() {
+		if err = client.Close(); err != nil {
+			log.Print(err)
+		}
+	}()
+
 	if err := gokrsyslogd(); err != nil {
 		log.Fatal(err)
 	}

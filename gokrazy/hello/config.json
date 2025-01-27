@@ -59,7 +59,10 @@
         "github.com/gokrazy/syslogd/cmd/gokr-syslogd": {
             "CommandLineFlags": [
                 "-listen=:514"
-            ]
+            ],
+            "ExtraFilePaths": {
+                "/etc/gcloud_application_default_credentials.json": "gcloud_application_default_credentials.json"
+            }
         },
         "github.com/gokrazy/wifi": {
             "ExtraFilePaths": {
