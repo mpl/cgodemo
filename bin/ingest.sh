@@ -1,6 +1,7 @@
 #!/bin/sh
+set -e
 
-GOOS=linux GOARCH=arm64 gok --parent_dir ./gokrazy/ overwrite --gaf /tmp/full.gaf
+GOOS=linux GOARCH=arm64 gok --parent_dir ./gokrazy/ overwrite --gaf /tmp/full.gaf 
 SBOM=$(unzip -p /tmp/full.gaf sbom.json | jq -r '.sbom_hash')
 echo $SBOM
 LINK=$(GOOS=linux GOARCH=arm64 gok --parent_dir ./gokrazy/ push --gaf /tmp/full.gaf --server http://localhost:8655 --json | jq -r '.download_link')
