@@ -1,99 +1,100 @@
 {
-    "Hostname": "marlin-augnat1",
-    "Update": {
-        "HTTPPassword": "uD4Sh05pKSyAYeY5oz7P"
-    },
-    "Packages": [
-        "github.com/gokrazy/serial-busybox",
-        "github.com/gokrazy/breakglass",
-        "github.com/gokrazy/wifi",
-        "github.com/mpl/simpleHttpd",
-        "tailscale.com/cmd/tailscaled",
-        "tailscale.com/cmd/tailscale",
-        "github.com/gokrazy/mkfs",
-        "github.com/gokrazy/selfupdate",
-        "github.com/mpl/cgodemo/localhello/cmd/localhello",
-        "github.com/gokrazy/syslogd/cmd/gokr-syslogd"
-    ],
-    "PackageConfig": {
-        "github.com/arribada/insight-360/whisper/cmd/transcribe": {
-            "GoBuildFlags": [
-                "-ldflags=-extldflags '-static -L /Users/mpl/src/github.com/mpl/cgodemo/whisper/whisper.cpp'"
-            ]
-        },
-        "github.com/gokrazy/breakglass": {
-            "CommandLineFlags": [
-                "-authorized_keys=/etc/breakglass.authorized_keys"
-            ],
-            "ExtraFilePaths": {
-                "/etc/breakglass.authorized_keys": "/Users/mpl/src/github.com/mpl/cgodemo/gokrazy/hello/breakglass.authorized_keys"
-            }
-        },
-        "github.com/gokrazy/gokrazy/cmd/dhcp": {
-            "DontStart": true
-        },
-        "github.com/gokrazy/gokrazy/cmd/heartbeat": {
-            "CommandLineFlags": [
-                "--gus_server=http://100.73.43.15:8655"
-            ]
-        },
-        "github.com/gokrazy/gokrazy/cmd/ntp": {
-            "CommandLineFlags": [
-                "0.pool.ntp.org",
-                "1.pool.ntp.org",
-                "2.pool.ntp.org",
-                "3.pool.ntp.org"
-            ]
-        },
-        "github.com/gokrazy/gokrazy/cmd/randomd": {
-            "ExtraFileContents": {
-                "/etc/machine-id": "a3a3a35e2b024ddf9e8aa7505231936f\n"
-            }
-        },
-        "github.com/gokrazy/selfupdate": {
-            "CommandLineFlags": [
-                "--gus_server=http://100.73.43.15:8655",
-                "--check_frequency=120s"
-            ]
-        },
-        "github.com/gokrazy/syslogd/cmd/gokr-syslogd": {
-            "CommandLineFlags": [
-                "-listen=:514"
-            ],
-            "ExtraFilePaths": {
-                "/etc/gcloud_application_default_credentials.json": "gcloud_application_default_credentials.json"
-            }
-        },
-        "github.com/gokrazy/wifi": {
-            "ExtraFilePaths": {
-                "/etc/wifi.json": "wifi.json"
-            }
-        },
-        "github.com/mpl/cgodemo/debug/cmd/myntp": {
-            "CommandLineFlags": [
-                "0.pool.ntp.org",
-                "1.pool.ntp.org",
-                "2.pool.ntp.org",
-                "3.pool.ntp.org"
-            ]
-        },
-        "github.com/mpl/simpleHttpd": {
-            "CommandLineFlags": [
-                "--autocert=false",
-                "--tls=false",
-                "--host=:9090"
-            ]
-        },
-        "tailscale.com/cmd/tailscale": {
-            "CommandLineFlags": [
-                "up",
-                "--auth-key=file:/etc/ts.key"
-            ],
-            "ExtraFilePaths": {
-                "/etc/ts.key": "ts.key"
-            }
-        }
-    },
-    "SerialConsole": "disabled",
-    "InternalCompatibilityFlags": {}
+	"Hostname": "marlin-augnat1",
+	"Update": {
+		"HTTPPassword": "uD4Sh05pKSyAYeY5oz7P"
+	},
+	"Packages": [
+		"github.com/gokrazy/serial-busybox",
+		"github.com/gokrazy/breakglass",
+		"github.com/gokrazy/wifi",
+		"github.com/mpl/simpleHttpd",
+		"tailscale.com/cmd/tailscaled",
+		"tailscale.com/cmd/tailscale",
+		"github.com/gokrazy/mkfs",
+		"github.com/gokrazy/selfupdate",
+		"github.com/mpl/cgodemo/localhello/cmd/localhello",
+		"github.com/gokrazy/syslogd/cmd/gokr-syslogd"
+	],
+	"PackageConfig": {
+		"github.com/arribada/insight-360/whisper/cmd/transcribe": {
+			"GoBuildFlags": [
+				"-ldflags=-extldflags '-static -L /Users/mpl/src/github.com/mpl/cgodemo/whisper/whisper.cpp'"
+			]
+		},
+		"github.com/gokrazy/breakglass": {
+			"CommandLineFlags": [
+				"-authorized_keys=/etc/breakglass.authorized_keys"
+			],
+			"ExtraFilePaths": {
+				"/etc/breakglass.authorized_keys": "/Users/mpl/src/github.com/mpl/cgodemo/gokrazy/hello/breakglass.authorized_keys"
+			}
+		},
+		"github.com/gokrazy/gokrazy/cmd/dhcp": {
+			"DontStart": true
+		},
+		"github.com/gokrazy/gokrazy/cmd/heartbeat": {
+			"CommandLineFlags": [
+				"--gus_server=http://100.73.43.15:8655"
+			]
+		},
+		"github.com/gokrazy/gokrazy/cmd/ntp": {
+			"CommandLineFlags": [
+				"0.pool.ntp.org",
+				"1.pool.ntp.org",
+				"2.pool.ntp.org",
+				"3.pool.ntp.org"
+			]
+		},
+		"github.com/gokrazy/gokrazy/cmd/randomd": {
+			"ExtraFileContents": {
+				"/etc/machine-id": "a3a3a35e2b024ddf9e8aa7505231936f\n"
+			}
+		},
+		"github.com/gokrazy/selfupdate": {
+			"CommandLineFlags": [
+				"--gus_server=http://100.73.43.15:8655",
+				"--check_frequency=120s"
+			]
+		},
+		"github.com/gokrazy/syslogd/cmd/gokr-syslogd": {
+			"CommandLineFlags": [
+				"-listen=:514",
+				"-goog_creds=/etc/marlin-sa-key.json"
+			],
+			"ExtraFilePaths": {
+				"/etc/marlin-sa-key.json": "marlin-sa-key.json"
+			}
+		},
+		"github.com/gokrazy/wifi": {
+			"ExtraFilePaths": {
+				"/etc/wifi.json": "wifi.json"
+			}
+		},
+		"github.com/mpl/cgodemo/debug/cmd/myntp": {
+			"CommandLineFlags": [
+				"0.pool.ntp.org",
+				"1.pool.ntp.org",
+				"2.pool.ntp.org",
+				"3.pool.ntp.org"
+			]
+		},
+		"github.com/mpl/simpleHttpd": {
+			"CommandLineFlags": [
+				"--autocert=false",
+				"--tls=false",
+				"--host=:9090"
+			]
+		},
+		"tailscale.com/cmd/tailscale": {
+			"CommandLineFlags": [
+				"up",
+				"--auth-key=file:/etc/ts.key"
+			],
+			"ExtraFilePaths": {
+				"/etc/ts.key": "ts.key"
+			}
+		}
+	},
+	"SerialConsole": "disabled",
+	"InternalCompatibilityFlags": {}
 }

@@ -30,3 +30,4 @@ gokrazy/hello/breakglass.authorized_keys
 gokrazy/hello/wifi.json*
 gokrazy/hello/ts.key
 gokrazy/hello/gcloud_application_default_credentials.json
+gokrazy/hello/marlin-sa-key.json

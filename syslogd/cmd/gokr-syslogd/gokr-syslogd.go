@@ -25,6 +25,14 @@ import (
 
 const basenameFormat = "2006-01-02.log"
 
+// TODO: enable/disable goog logging. use cloud project name for it?
+var (
+	flagOutdir          string
+	flagListenAddrs     string
+	flagTestGoogLogging bool
+	flagGoogCredentials string
+)
+
 var (
 	// logRateLimited throttles printing error message. This is particularly
 	// important when the gokr-syslogd output itself is sent to gokr-syslogd, which
@@ -43,6 +51,10 @@ func init() {
 			atomic.StoreUint32(&logRateLimited, 0)
 		}
 	}()
+	flag.StringVar(&flagOutdir, "outdir", "/perm/syslogd", "directory to which to write syslog to")
+	flag.StringVar(&flagListenAddrs, "listen", "127.0.0.1:5514", "[host]:port listen address")
+	flag.BoolVar(&flagTestGoogLogging, "testgoog", false, "test logging with goog cloud logging on startup and exit immediately")
+	flag.StringVar(&flagGoogCredentials, "goog_creds", "", "google application credentials file")
 }
 
 type fileKey struct {
@@ -217,20 +229,8 @@ func (s *server) deleteOldLogs() error {
 }
 
 func gokrsyslogd() error {
-	// TODO: enable/disable goog logging. use cloud project name for it?
-	var (
-		outdir = flag.String("outdir",
-			"/perm/syslogd",
-			"directory to which to write syslog to")
-
-		listenAddrs = flag.String("listen",
-			"127.0.0.1:5514",
-			"[host]:port listen address")
-	)
-	flag.Parse()
-
 	srv := server{
-		dir:   *outdir,
+		dir:   flagOutdir,
 		files: make(map[fileKey]*openFile),
 	}
 
@@ -254,7 +254,7 @@ func gokrsyslogd() error {
 	// RFC3164 seems to be what Go’s standard library log/syslog package uses.
 	// The other two available formats (RFC6587, RFC5424) result in garbage.
 	syslogsrv.SetFormat(syslog.RFC3164)
-	addrs := strings.Split(*listenAddrs, ",")
+	addrs := strings.Split(flagListenAddrs, ",")
 	for _, addr := range addrs {
 		if err := syslogsrv.ListenUDP(addr); err != nil {
 			return err
@@ -264,7 +264,7 @@ func gokrsyslogd() error {
 	if err := syslogsrv.Boot(); err != nil {
 		return err
 	}
-	log.Printf("writing to %s all remote syslog received on %s", *outdir, *listenAddrs)
+	log.Printf("writing to %s all remote syslog received on %s", flagOutdir, flagListenAddrs)
 
 	// Every 100 syslog messages, look through currently open files to close
 	// unused ones.
@@ -381,7 +381,11 @@ type MyEntry struct {
 
 func initGoogLogging() *logging.Client {
 	// TODO: set that env var in gokrazy config
-	if err := os.Setenv("GOOGLE_APPLICATION_CREDENTIALS", "/etc/gcloud_application_default_credentials.json"); err != nil {
+	if flagGoogCredentials == "" {
+		log.Println("no google application credentials file provided")
+		return nil
+	}
+	if err := os.Setenv("GOOGLE_APPLICATION_CREDENTIALS", flagGoogCredentials); err != nil {
 		log.Println(err)
 		return nil
 	}
@@ -397,6 +401,7 @@ func initGoogLogging() *logging.Client {
 }
 
 func main() {
+	flag.Parse()
 
 	client := initGoogLogging()
 	if client != nil {
@@ -405,6 +410,18 @@ func main() {
 				log.Print(err)
 			}
 		}()
+	}
+
+	if flagTestGoogLogging {
+		if glog == nil {
+			log.Fatal("goog logger not initialized, cannot test logging")
+		}
+		glog.Log(logging.Entry{Payload: MyEntry{
+			Hostname: "fake hostname",
+			Tag:      "diagnostic",
+			Content:  "Test from syslogd",
+		}})
+		return
 	}
 
 	if err := gokrsyslogd(); err != nil {
