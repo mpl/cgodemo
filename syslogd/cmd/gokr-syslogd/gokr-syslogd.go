@@ -25,7 +25,6 @@ import (
 
 const basenameFormat = "2006-01-02.log"
 
-// TODO: enable/disable goog logging. use cloud project name for it?
 var (
 	flagOutdir          string
 	flagListenAddrs     string
@@ -54,7 +53,7 @@ func init() {
 	flag.StringVar(&flagOutdir, "outdir", "/perm/syslogd", "directory to which to write syslog to")
 	flag.StringVar(&flagListenAddrs, "listen", "127.0.0.1:5514", "[host]:port listen address")
 	flag.BoolVar(&flagTestGoogLogging, "testgoog", false, "test logging with goog cloud logging on startup and exit immediately")
-	flag.StringVar(&flagGoogCredentials, "goog_creds", "", "google application credentials file")
+	flag.StringVar(&flagGoogCredentials, "goog_creds", "", "google application credentials file. leave empty to disable goog logging.")
 }
 
 type fileKey struct {
@@ -380,7 +379,6 @@ type MyEntry struct {
 }
 
 func initGoogLogging() *logging.Client {
-	// TODO: set that env var in gokrazy config
 	if flagGoogCredentials == "" {
 		log.Println("no google application credentials file provided")
 		return nil
