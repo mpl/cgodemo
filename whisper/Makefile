@@ -55,10 +55,17 @@ breakglass: ./bin/${TRANSCRIBE}
 	@cd ./bin && tar cf ../breakglass.tar ${TRANSCRIBE}
 	@breakglass -debug_tarball_pattern=breakglass.tar hello
 
-.PHONY: update
-update: ## updating with gok
-update:
-	@GOOS=linux GOARCH=arm64 CGO_ENABLED=1 ${GOPATH}/bin/gok update --parent_dir=../gokrazy
+# TODO: move somewhere else?
+#.PHONY: update
+#update: ## push update to GUS server.
+#update:
+#	@cd .. && ./bin/ingest.sh
+#
+## TODO: move somewhere else?
+#.PHONY: forceupdate
+#forceupdate: ## push update directly to device, usually not what you want.
+#forceupdate:
+#	@GOOS=linux GOARCH=arm64 CGO_ENABLED=1 ${GOPATH}/bin/gok update --parent_dir=../gokrazy
 
 .PHONY: prelint
 prelint: ## Prepare for linting.

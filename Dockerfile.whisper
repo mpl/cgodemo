@@ -3,18 +3,17 @@ FROM goreleaser/goreleaser-cross:v1.23.3@sha256:cc69304a8817dde675f0afe551c38054
 RUN apt-get update
 RUN apt-get install -y git
 
-# TODO: pin it
 RUN mkdir -p /Users/mpl
 ENV GOPATH=/Users/mpl
-RUN go install github.com/gokrazy/tools/cmd/gok@main
+RUN go install github.com/gokrazy/tools/cmd/gok@6bec690fe5cd
 
 WORKDIR /Users/mpl/src/github.com/mpl/cgodemo/whisper
 COPY ./whisper .
 # TODO: just run make libwhisper.a in .cpp
-RUN cd ./whisper.cpp/bindings/go && make whisper
+# RUN cd ./whisper.cpp/bindings/go && make whisper
+RUN cd ./whisper.cpp && make libwhisper.a
 ENV WHIPSPER_CPP=/Users/mpl/src/github.com/mpl/cgodemo/whisper/whisper.cpp
 
-# TODO: move up when we've settled with this
 WORKDIR /Users/mpl/src/github.com/mpl/cgodemo/gokrazy
 COPY ./gokrazy .
 
@@ -24,10 +23,34 @@ ARG gitcreds
 COPY ./gitcreds.sh .
 RUN ./gitcreds.sh $gitcreds
 
-# TODO: maybe remove
 WORKDIR /Users/mpl/src/github.com/mpl/cgodemo/whisper
+# TODO: remove once we have new laptop, and we can afford to fail as late as within gok.
 RUN make build
 
-ENV GOPROXY=direct
+# TODO: move it up, and probably even in an early stage
+# TODO: rename/move it to /Users/mpl in buildir when we have new laptop.
+# TODO: or find a way to make path dynamic, so we can (at least partially) build both with or without docker.
+WORKDIR /Users/mpl/src/github.com/mpl/cgodemo/syslogd
+COPY ./syslogd .
+WORKDIR /Users/mpl/src/github.com/mpl/cgodemo/localhello
+COPY ./localhello .
+
+FROM builder as update
+# TODO: still needed?
+ENV GOPROXY=https://proxy.golang.org,direct
 ENV GOSUMDB=off
-RUN make update
+# TODO: move it up
+WORKDIR /Users/mpl/src/github.com/mpl/cgodemo/bin
+COPY ./bin .
+WORKDIR /Users/mpl/src/github.com/mpl/cgodemo
+COPY ./Makefile .
+RUN make updatenodocker
+
+FROM builder as forceupdate
+# TODO: still needed?
+ENV GOPROXY=https://proxy.golang.org,direct
+ENV GOSUMDB=off
+# TODO: move it up
+WORKDIR /Users/mpl/src/github.com/mpl/cgodemo/
+COPY ./Makefile .
+RUN make forceupdatenodocker
