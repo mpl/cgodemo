@@ -10,9 +10,9 @@ RUN go install github.com/gokrazy/tools/cmd/gok@6bec690fe5cd
 WORKDIR /Users/mpl/src/github.com/mpl/cgodemo/whisper
 COPY ./whisper .
 # TODO: just run make libwhisper.a in .cpp
-# RUN cd ./whisper.cpp/bindings/go && make whisper
-RUN cd ./whisper.cpp && make libwhisper.a
-ENV WHIPSPER_CPP=/Users/mpl/src/github.com/mpl/cgodemo/whisper/whisper.cpp
+RUN cd ./whisper.cpp/bindings/go && make whisper
+# RUN cd ./whisper.cpp && make libwhisper.a
+# ENV WHIPSPER_CPP=/Users/mpl/src/github.com/mpl/cgodemo/whisper/whisper.cpp
 
 WORKDIR /Users/mpl/src/github.com/mpl/cgodemo/gokrazy
 COPY ./gokrazy .
@@ -23,8 +23,9 @@ ARG gitcreds
 COPY ./gitcreds.sh .
 RUN ./gitcreds.sh $gitcreds
 
+# if we let that be implicitly done during gok update, then whisper.h is not found during the compilation of the bindings.
+# while if we do it here and now, no problem. So it's necessary to keep it until we understand better what's going on.
 WORKDIR /Users/mpl/src/github.com/mpl/cgodemo/whisper
-# TODO: remove once we have new laptop, and we can afford to fail as late as within gok.
 RUN make build
 
 # TODO: move it up, and probably even in an early stage
