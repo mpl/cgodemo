@@ -19,7 +19,7 @@ func init() {
 	flag.StringVar(&flagHost, "host", ":9091", "host:port on which we receive start/stop messages")
 }
 
-const newcode = "now with service account key for logging"
+const newcode = "ingesting from within docker"
 
 func main() {
 	flag.Parse()

@@ -13,8 +13,7 @@
 		"github.com/gokrazy/mkfs",
 		"github.com/gokrazy/selfupdate",
 		"github.com/mpl/cgodemo/localhello/cmd/localhello",
-		"github.com/gokrazy/syslogd/cmd/gokr-syslogd",
-		"github.com/arribada/insight-360/whisper/cmd/transcribe"
+		"github.com/gokrazy/syslogd/cmd/gokr-syslogd"
 	],
 	"PackageConfig": {
 		"github.com/arribada/insight-360/whisper/cmd/transcribe": {
