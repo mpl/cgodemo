@@ -9,6 +9,9 @@ RUN mkdir -p /Users/mpl
 ENV GOPATH=/Users/mpl
 RUN go install github.com/gokrazy/tools/cmd/gok@6bec690fe5cd
 
+WORKDIR /Users/mpl/src/github.com/mpl/cgodemo/common
+COPY ./common .
+
 WORKDIR /Users/mpl/src/github.com/mpl/cgodemo/whisper
 COPY ./whisper .
 # TODO: just run make libwhisper.a in .cpp
