@@ -19,6 +19,6 @@ updatenodocker:
 .PHONY: forceupdatenodocker
 forceupdatenodocker: ## push update directly to device, usually not what you want.
 forceupdatenodocker:
-	@GOOS=linux GOARCH=arm64 CGO_ENABLED=1 ${GOPATH}/bin/gok update --parent_dir=./gokrazy
+	@CGO_ENABLED=1 GOOS=linux GOARCH=arm64 CGO_ENABLED=1 ${GOPATH}/bin/gok update --parent_dir=./gokrazy
 
 default: update
