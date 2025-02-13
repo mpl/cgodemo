@@ -23,7 +23,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/arribada/insight-360-common/pkg/common"
+//	"github.com/arribada/insight-360-common/pkg/common"
 	"github.com/arribada/insight-360/common/pkg/datatype"
 	"github.com/arribada/insight-360/common/pkg/utils"
 	"github.com/arribada/insight-360/whisper/pkg/gc"
@@ -96,7 +96,8 @@ func main() {
 	}
 
 	var err error
-	audioSource, err = common.MResolve(flagSource)
+//	audioSource, err = common.MResolve(flagSource)
+	audioSource = flagSource
 	if err != nil {
 		log.Fatal(err)
 	}
