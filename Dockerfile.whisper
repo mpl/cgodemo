@@ -1,6 +1,7 @@
 FROM goreleaser/goreleaser-cross:v1.23.3@sha256:cc69304a8817dde675f0afe551c380545d5f34444946004961116ff394437a6f AS builder
 
 RUN apt-get update
+# TODO: unzip here
 RUN apt-get install -y git
 # ENV GOPROXY=http://192.168.0.29:3000
 
@@ -37,20 +38,19 @@ COPY ./syslogd .
 WORKDIR /Users/mpl/src/github.com/mpl/cgodemo/localhello
 COPY ./localhello .
 
-FROM builder as update
-# TODO: still needed?
-# ENV GOPROXY=https://proxy.golang.org,direct
+FROM builder AS update
+ENV GOPROXY=http://192.168.0.47:3000,https://proxy.golang.org,direct
 ENV GOSUMDB=off
 # TODO: move it up
 WORKDIR /Users/mpl/src/github.com/mpl/cgodemo/bin
 COPY ./bin .
 WORKDIR /Users/mpl/src/github.com/mpl/cgodemo
 COPY ./Makefile .
+RUN apt-get install -y unzip
 RUN make updatenodocker
 
-FROM builder as forceupdate
-# TODO: still needed?
-# ENV GOPROXY=https://proxy.golang.org,direct
+FROM builder AS forceupdate
+ENV GOPROXY=http://192.168.0.47:3000,https://proxy.golang.org,direct
 ENV GOSUMDB=off
 # TODO: move it up
 WORKDIR /Users/mpl/src/github.com/mpl/cgodemo/

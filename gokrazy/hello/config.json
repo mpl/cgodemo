@@ -34,7 +34,7 @@
 		},
 		"github.com/gokrazy/gokrazy/cmd/heartbeat": {
 			"CommandLineFlags": [
-				"--gus_server=http://100.73.43.15:8655"
+				"--gus_server=http://100.109.9.11:8655"
 			]
 		},
 		"github.com/gokrazy/gokrazy/cmd/ntp": {
@@ -52,7 +52,7 @@
 		},
 		"github.com/gokrazy/selfupdate": {
 			"CommandLineFlags": [
-				"--gus_server=http://100.73.43.15:8655",
+				"--gus_server=http://100.109.9.11:8655",
 				"--check_frequency=120s"
 			]
 		},
