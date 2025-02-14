@@ -18,6 +18,7 @@
 	],
 	"PackageConfig": {
 		"github.com/arribada/insight-360/whisper/cmd/transcribe": {
+			"WaitForClock": true,
 			"GoBuildFlags": [
 				"-ldflags=-extldflags '-static -L /Users/mpl/src/github.com/mpl/cgodemo/whisper/whisper.cpp'"
 			],

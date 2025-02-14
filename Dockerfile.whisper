@@ -45,12 +45,13 @@ FROM builder AS update
 ENV GOPROXY=http://192.168.0.47:3000,https://proxy.golang.org,direct
 ENV GOSUMDB=off
 # TODO: move it up
+# TODO: ingest not needed anymore?
 WORKDIR /Users/mpl/src/github.com/mpl/cgodemo/bin
 COPY ./bin .
 WORKDIR /Users/mpl/src/github.com/mpl/cgodemo
 COPY ./Makefile .
 RUN apt-get install -y unzip
-RUN make updatenodocker
+RUN make gaf
 
 FROM builder AS forceupdate
 ENV GOPROXY=http://192.168.0.47:3000,https://proxy.golang.org,direct
@@ -58,4 +59,8 @@ ENV GOSUMDB=off
 # TODO: move it up
 WORKDIR /Users/mpl/src/github.com/mpl/cgodemo/
 COPY ./Makefile .
+# only do gaf? and push from out of docker?
 RUN make forceupdatenodocker
+
+FROM scratch AS gaf
+COPY --from=update /tmp/full.gaf /
